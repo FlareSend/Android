@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.hardware.Camera;
@@ -114,22 +115,25 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 		//transforms NV21 pixel data into RGB pixels  
 		decodeYUV420SP(pixels, data, previewSize.width,  previewSize.height);  
 		int[] avg = averagePixels(pixels);
-		int[][] bounds = {{60, 120, 180, 240}, {60, 120, 180, 240}, {60, 120, 180, 240}};
-		int threshold = 25; 
+		int[][] bounds = {{100, 210}, {100, 210}, {100, 210}};
+		int threshold = 50; 
 		int[] colors = {-2, -2, -2};
+		ct++;
 		for(int i=0; i<3; i++) {
-			for(int j=0; j<4; j++) {
+			for(int j=0; j<2; j++) {
 				if(avg[i] < bounds[i][j] + threshold && avg[i] >= bounds[i][j] - threshold) {
 					colors[i] = j;
 				}
-				else if(avg[i] < 2) {
+				else if(avg[i] < 10) {
 					colors[i] = -1;
 				}
 			}
 		}
+//		System.out.format("%d, %d, %d%n", avg[0], avg[1], avg[2]);
 		background.setBackgroundColor(Color.rgb(avg[0], avg[1], avg[2]));
 		if(colors[0] != prevColors[0] || colors[1] != prevColors[1] || colors[2] != prevColors[2]) {
 			if(colors[0] == -1 && colors[1] == -1 && colors[2] == -1) {
+				ct = 0;
 				colors[0] = prevColors[0];
 				colors[1] = prevColors[1];
 				colors[2] = prevColors[2];
@@ -138,6 +142,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 				prevColors[2] = -1;
 			}
 			if(colors[0] != -2 && colors[1] != -2 && colors[2] != -2) {
+				ct = 0;
 				prevColors[0] = colors[0];
 				prevColors[1] = colors[1];
 				prevColors[2] = colors[2];
@@ -145,25 +150,18 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 				for(int i=0; i<3; i++) {
 					switch(colors[i]) {
 					case 0:
-						msg+="00";
+						msg+="0";
 						break;
 					case 1:
-						msg+="01";
-						break;
-					case 2:
-						msg+="10";
-						break;
-					case 3:
-						msg+="11";
-						break;
-					default:
+						msg+="1";
 						break;
 					}
 				}
-//				if(msg.length() >= 6) {
-//					System.out.println(msg);
-//					msg = "";
-//				}
+			}
+			if(ct > 25 && !msg.equals("")) {
+				new AlertDialog.Builder(
+						this.getContext()).setTitle("Message Received!").setMessage(msg).create().show();
+				camera.stopPreview();
 			}
 		}
 	}  
@@ -175,6 +173,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 			average[1] += Color.green(pixels[i]);
 			average[2] += Color.blue(pixels[i]);
 		}
+		System.out.println(pixels.length);
 		average[0] /= pixels.length;
 		average[1] /= pixels.length;
 		average[2] /= pixels.length;

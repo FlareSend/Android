@@ -1,35 +1,39 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent" 
+    android:background="@color/background">
 
     <TextView
         android:id="@+id/textView1"
+        android:textColor="@color/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="82dp"
-        android:text="FLARE"
+        android:text="flare"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/button1"
+    <TextView
+        android:textColor="@color/text"
+       	android:textSize="24pt"
+        android:id="@+id/left_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:onClick="launchTransmit"
-        android:text="Transmit" />
+        android:layout_marginLeft="10dp"
+        android:text="@string/icon_arrow_left" />
 
-    <Button
-        android:id="@+id/button2"
+    <TextView
+        android:textColor="@color/text"
+        android:textSize="24pt"
+        android:id="@+id/right_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignRight="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="15dp"
-        android:onClick="launchReceive"
-        android:text="Receive" />
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:text="@string/icon_arrow_right" />
 
 </RelativeLayout>
