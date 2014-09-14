@@ -4,36 +4,43 @@
     android:background="@color/background">
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/title"
         android:textColor="@color/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="82dp"
-        android:text="flare"
+        android:layout_marginTop="70dp"
+        android:textSize="32pt"
+        android:text="Flare"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:textColor="@color/text"
-       	android:textSize="24pt"
-        android:id="@+id/left_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:text="@string/icon_arrow_left" />
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:layout_alignParentLeft="true"
+	    android:orientation="horizontal" >
 
-    <TextView
-        android:textColor="@color/text"
-        android:textSize="24pt"
-        android:id="@+id/right_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:text="@string/icon_arrow_right" />
+	    <Button
+	        android:id="@+id/left_arrow"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:onClick="launchTransmit"
+	        android:text="@string/icon_upload"
+	        android:textColor="@color/text"
+	        android:layout_weight="1"
+	        android:textSize="32pt" />
+
+	    <Button
+	        android:id="@+id/right_arrow"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:onClick="launchReceive"
+	        android:layout_weight="1"
+	        android:text="@string/icon_download"
+	        android:textColor="@color/text"
+	        android:textSize="32pt" />
+	</LinearLayout>
 
 </RelativeLayout>

@@ -8,4 +8,6 @@
 	<string name="icon_arrow_left">&#xf060;</string>
 	<string name="icon_arrow_up">&#xf062;</string>
 	<string name="icon_arrow_down">&#xf063;</string>
+	<string name="icon_download">&#xf019;</string>
+	<string name="icon_upload">&#xf093;</string>
 </resources>

@@ -3,6 +3,7 @@ package com.moroze.flare;
 import android.app.Activity;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.FrameLayout;
 
 public class ReceiveActivity extends Activity {
@@ -12,6 +13,8 @@ public class ReceiveActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_receive);
 
         // Create an instance of Camera
